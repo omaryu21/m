@@ -1,0 +1,499 @@
+@import url("https://fonts.googleapis.com/css2?family=Kings&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ff9db2;
+  user-select: none;
+  background-image: url("./icons/Group\ 1.png");
+  background-size: 100% 100vh;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.controlBtns {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 30;
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
+.controlBtns img {
+  width: 200px;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 15px;
+  /* text-align: center; */
+}
+
+.controlBtns p {
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bolder;
+}
+
+.controlBtns button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  font-size: 2.5rem;
+  padding: 1rem 3rem;
+  background-color: #b2e6ff;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+
+.win {
+  display: none;
+}
+
+.win.show {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 30;
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
+.win.show div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  border: none;
+  font-size: 2.5rem;
+  padding: 1rem 3rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+
+.win.show div p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.win.show div button {
+  border: none;
+  font-size: 2.5rem;
+  padding: 1rem 3rem;
+  background-color: #b2e6ff;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+
+div.infoContainer {
+  display: flex;
+  /* font-size: 50px; */
+  font-family: "Noto Sans", sans-serif;
+  margin: 2% 10%;
+  justify-content: space-between;
+}
+
+/* .infoContainer div.tries {
+  float: right;
+  width: 50%;
+  text-align: right;
+} */
+
+div.tries {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+}
+
+button.newGameButton {
+  width: 250px;
+  background-color: #b78eff;
+  text-align: center;
+  border-radius: 10px;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  border: none;
+  transition-delay: 0.15s;
+  /* padding-top: 0.7rem; */
+}
+
+button.newGameButton:hover {
+  background-color: #f4e9c9;
+  cursor: pointer;
+}
+
+div.newGameButton p {
+  display: inline-block;
+}
+
+div.memoryGameBlocks {
+  display: flex;
+  min-width: 300px;
+  max-width: 500px;
+  flex-wrap: wrap;
+  margin: 4rem auto;
+}
+
+div.memoryGameBlocks.noClicking {
+  pointer-events: none;
+}
+
+div.memoryGameBlocks .gameBlock {
+  height: 100px;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  flex: 1 0 100px;
+  margin: 0 0.5rem 1rem;
+}
+
+div.memoryGameBlocks .gameBlock.show,
+div.memoryGameBlocks .gameBlock.hasMatched {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+div.memoryGameBlocks .gameBlock.restart {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+div.memoryGameBlocks .gameBlock div.front {
+  background-image: url("./icons/puzzle-piece\ 1.png");
+  background-position: center center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-color: #b78eff;
+  line-height: 100px;
+}
+
+div.memoryGameBlocks .gameBlock div.front::before {
+  content: "";
+  font-size: 3rem;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+div.memoryGameBlocks .gameBlock div.back {
+  transform: rotateY(180deg);
+  /* background-color: #ffe59c; */
+  /* text-align: center; */
+}
+
+div.memoryGameBlocks .gameBlock div.face {
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  text-align: center;
+  backface-visibility: hidden;
+  border-radius: 50%;
+}
+
+div.icon8 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+div.omar {
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .win.show {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .win.show div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  .win.show div p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
+  }
+
+  .win.show div button {
+    border: none;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    background-color: #b2e6ff;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 650px) {
+  /* .none {
+    display: none;
+  } */
+
+  .controlBtns {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .controlBtns button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    background-color: #b2e6ff;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  .win.show {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .win.show div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 1rem 3rem;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  .win.show div p {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.3rem;
+  }
+
+  .win.show div button {
+    border: none;
+    font-size: 1rem;
+    width: 200px;
+    padding: 1rem 3rem;
+    background-color: #b2e6ff;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  div.tries {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+
+  button.newGameButton {
+    width: 150px;
+    background-color: #b78eff;
+    text-align: center;
+    border-radius: 10px;
+    font-family: "Kings", cursive;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    transition-delay: 0.15s;
+    /* padding-top: 0.7rem; */
+  }
+
+  div.memoryGameBlocks {
+    display: flex;
+    min-width: 400px;
+    max-width: 420px;
+    flex-wrap: wrap;
+    margin: 4rem auto;
+  }
+  div.memoryGameBlocks .gameBlock div.face {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    backface-visibility: hidden;
+    border-radius: 50%;
+  }
+  .back img {
+    width: 70px;
+    height: 70px;
+  }
+
+  div.memoryGameBlocks .gameBlock {
+    width: 75px;
+    height: 75px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    flex: 1 0 70px;
+    margin: 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .win.show {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .win.show div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 1rem 3rem;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  .win.show div p {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.3rem;
+  }
+
+  .win.show div button {
+    border: none;
+    font-size: 1rem;
+    width: 200px;
+    padding: 1rem 3rem;
+    background-color: #b2e6ff;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+  .controlBtns {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .controlBtns button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    background-color: #b2e6ff;
+    border-radius: 0.7rem;
+    cursor: pointer;
+  }
+
+  div.infoContainer {
+    justify-content: space-around;
+    margin-top: 1rem;
+  }
+  div.tries {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+
+  button.newGameButton {
+    width: 100px;
+    background-color: #B78EFF;
+    text-align: center;
+    border-radius: 10px;
+    font-family: "Kings", cursive;
+    margin: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    transition-delay: 0.15s;
+    /* padding-top: 0.7rem; */
+  }
+  div.memoryGameBlocks {
+    display: flex;
+    min-width: 300px;
+    max-width: 320px;
+    flex-wrap: wrap;
+    margin: 2rem auto;
+  }
+  div.memoryGameBlocks .gameBlock div.face {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    backface-visibility: hidden;
+    border-radius: 50%;
+  }
+  .back img {
+    width: 50px;
+    height: 50px;
+  }
+
+  div.memoryGameBlocks .gameBlock {
+    width: 55px;
+    height: 55px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    flex: 1 0 55px;
+    margin: 0 0.5rem 1rem;
+  }
+}
